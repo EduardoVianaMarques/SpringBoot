@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class EstudantesService {
@@ -22,9 +23,15 @@ public class EstudantesService {
         return estudanteRepository.findAll();
 
     }
-    public EstudanteModel buscarPorID(Long id){
-        return  estudanteRepository.findById(id).orElse(null);
+    public Optional<EstudanteModel> buscarPorID(Long id){
+        return  estudanteRepository.findById(id);
 
+    }
+
+    public EstudanteModel atualizarEstudante(Long id, EstudanteModel estudanteModel){
+        EstudanteModel newEstudante = estudanteRepository.findById(id).get();
+        newEstudante.setNome(estudanteModel.getNome());
+        return  estudanteRepository.save(newEstudante);
     }
 
     public void deletarEstudante(Long id){
