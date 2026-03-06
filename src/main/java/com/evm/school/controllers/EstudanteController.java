@@ -9,11 +9,17 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "/alunos")
+@RequestMapping(path = "/Estudantes")
 
 public class EstudanteController {
     @Autowired
     private EstudantesService estudanteService;
+
+    @GetMapping
+    public List<EstudanteModel> listarTodosEstudante(){
+        return estudanteService. findall();
+
+    }
 
     @PostMapping
     public EstudanteModel criarEstudante(@RequestBody EstudanteModel estudanteModel){
@@ -21,18 +27,7 @@ public class EstudanteController {
     }
 
 
-    @GetMapping
-    public List<EstudanteModel> listarTodosEstudante(){
-        return estudanteService.listarTodosEstudante();
-
-    }
-
-    @GetMapping("/{id}")
-    public Optional<EstudanteModel> buscarPorID(@PathVariable Long id){
-        return estudanteService.buscarPorID(id);
-    }
-
-    @PutMapping("{id}")
+    @PutMapping("/{id}")
     public EstudanteModel atualizarEstudante(@PathVariable Long id,@RequestBody EstudanteModel estudanteModel){
         return  estudanteService.atualizarEstudante(id, estudanteModel);
     }

@@ -15,22 +15,20 @@ public class EstudantesService {
     @Autowired
     private EstudanteRepository estudanteRepository;
 
+        public List<EstudanteModel> findall(){
+        return estudanteRepository.findAll();
+
+    }
+
     public EstudanteModel criarEstudante(EstudanteModel estudanteModel){
         return estudanteRepository.save(estudanteModel);
     }
 
-    public List<EstudanteModel> listarTodosEstudante(){
-        return estudanteRepository.findAll();
-
-    }
-    public Optional<EstudanteModel> buscarPorID(Long id){
-        return  estudanteRepository.findById(id);
-
-    }
 
     public EstudanteModel atualizarEstudante(Long id, EstudanteModel estudanteModel){
         EstudanteModel newEstudante = estudanteRepository.findById(id).get();
         newEstudante.setNome(estudanteModel.getNome());
+        newEstudante.setEmail(estudanteModel.getEmail());
         return  estudanteRepository.save(newEstudante);
     }
 
