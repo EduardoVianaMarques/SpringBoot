@@ -32,7 +32,7 @@ public class EstudantesService {
         return  estudanteRepository.save(newEstudante);
     }
 
-    public void deletarEstudante(Long id){
+    public void deletar(Long id){
         estudanteRepository.deleteById(id);
 
     }
